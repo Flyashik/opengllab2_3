@@ -1,4 +1,4 @@
-// Градиентнйы треугольник
+// ГѓГ°Г Г¤ГЁГҐГ­ГІГ­Г©Г» ГІГ°ГҐГіГЈГ®Г«ГјГ­ГЁГЄ
 
 #include <gl/glew.h>
 #include <SFML/OpenGL.hpp>
@@ -8,21 +8,21 @@
 #include <iostream>
 
 
-// Переменные с индентификаторами ID
-// ID шейдерной программы
+// ГЏГҐГ°ГҐГ¬ГҐГ­Г­Г»ГҐ Г± ГЁГ­Г¤ГҐГ­ГІГЁГґГЁГЄГ ГІГ®Г°Г Г¬ГЁ ID
+// ID ГёГҐГ©Г¤ГҐГ°Г­Г®Г© ГЇГ°Г®ГЈГ°Г Г¬Г¬Г»
 GLuint Program;
-// ID атрибута вершин
+// ID Г ГІГ°ГЁГЎГіГІГ  ГўГҐГ°ГёГЁГ­
 GLint Attrib_vertex;
-// ID атрибута цвета
+// ID Г ГІГ°ГЁГЎГіГІГ  Г¶ГўГҐГІГ 
 GLint Attrib_color;
-// ID юниформ переменной цвета
+// ID ГѕГ­ГЁГґГ®Г°Г¬ ГЇГҐГ°ГҐГ¬ГҐГ­Г­Г®Г© Г¶ГўГҐГІГ 
 GLint Unif_color;
-// ID VBO вершин
+// ID VBO ГўГҐГ°ГёГЁГ­
 GLuint VBO_position;
-// ID VBO цвета
+// ID VBO Г¶ГўГҐГІГ 
 GLuint VBO_color;
 GLint Unif_scale;
-// Вершина
+// Г‚ГҐГ°ГёГЁГ­Г 
 struct Vertex
 {
     GLfloat x;
@@ -30,7 +30,7 @@ struct Vertex
 };
 
 float scale[2] = { 1.0f, 1.0f };
-// Исходный код вершинного шейдера
+// Г€Г±ГµГ®Г¤Г­Г»Г© ГЄГ®Г¤ ГўГҐГ°ГёГЁГ­Г­Г®ГЈГ® ГёГҐГ©Г¤ГҐГ°Г 
 const char* VertexShaderSource = R"(
     #version 330 core
     in vec2 coord;
@@ -49,7 +49,7 @@ const char* VertexShaderSource = R"(
     }
 )";
 
-// Исходный код фрагментного шейдера
+// Г€Г±ГµГ®Г¤Г­Г»Г© ГЄГ®Г¤ ГґГ°Г ГЈГ¬ГҐГ­ГІГ­Г®ГЈГ® ГёГҐГ©Г¤ГҐГ°Г 
 const char* FragShaderSource = R"(
     #version 330 core
     in vec4 vert_color;
@@ -59,7 +59,6 @@ const char* FragShaderSource = R"(
         colors = vert_color;
     }
 )";
-
 
 void Init();
 void Draw();
@@ -77,7 +76,7 @@ int main() {
 
     window.setActive(true);
 
-    // Инициализация glew
+    // Г€Г­ГЁГ¶ГЁГ Г«ГЁГ§Г Г¶ГЁГї glew
     glewInit();
 
     Init();
@@ -117,16 +116,16 @@ int main() {
 }
 
 
-// Проверка ошибок OpenGL, если есть то вывод в консоль тип ошибки
+// ГЏГ°Г®ГўГҐГ°ГЄГ  Г®ГёГЁГЎГ®ГЄ OpenGL, ГҐГ±Г«ГЁ ГҐГ±ГІГј ГІГ® ГўГ»ГўГ®Г¤ Гў ГЄГ®Г­Г±Г®Г«Гј ГІГЁГЇ Г®ГёГЁГЎГЄГЁ
 void checkOpenGLerror() {
     GLenum errCode;
-    // Коды ошибок можно смотреть тут
+    // ГЉГ®Г¤Г» Г®ГёГЁГЎГ®ГЄ Г¬Г®Г¦Г­Г® Г±Г¬Г®ГІГ°ГҐГІГј ГІГіГІ
     // https://www.khronos.org/opengl/wiki/OpenGL_Error
     if ((errCode = glGetError()) != GL_NO_ERROR)
         std::cout << "OpenGl error!: " << errCode << std::endl;
 }
 
-// Функция печати лога шейдера
+// Г”ГіГ­ГЄГ¶ГЁГї ГЇГҐГ·Г ГІГЁ Г«Г®ГЈГ  ГёГҐГ©Г¤ГҐГ°Г 
 void ShaderLog(unsigned int shader)
 {
     int infologLen = 0;
@@ -182,7 +181,7 @@ void InitVBO()
 {
     glGenBuffers(1, &VBO_position);
     glGenBuffers(1, &VBO_color);
-    // Вершины треугольника
+    // Г‚ГҐГ°ГёГЁГ­Г» ГІГ°ГҐГіГЈГ®Г«ГјГ­ГЁГЄГ 
     float R = 1.0f;
     float G = 1.0f;
     float B = 1.0f;
@@ -209,7 +208,7 @@ void InitVBO()
         colors[i][2] = B;
         colors[i][3] = 1.0f;
     }
-    // Передаем вершины в буфер
+    // ГЏГҐГ°ГҐГ¤Г ГҐГ¬ ГўГҐГ°ГёГЁГ­Г» Гў ГЎГіГґГҐГ°
     glBindBuffer(GL_ARRAY_BUFFER, VBO_position);
     glBufferData(GL_ARRAY_BUFFER, sizeof(triangle), triangle, GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, VBO_color);
@@ -219,32 +218,32 @@ void InitVBO()
 
 
 void InitShader() {
-    // Создаем вершинный шейдер
+    // Г‘Г®Г§Г¤Г ГҐГ¬ ГўГҐГ°ГёГЁГ­Г­Г»Г© ГёГҐГ©Г¤ГҐГ°
     GLuint vShader = glCreateShader(GL_VERTEX_SHADER);
-    // Передаем исходный код
+    // ГЏГҐГ°ГҐГ¤Г ГҐГ¬ ГЁГ±ГµГ®Г¤Г­Г»Г© ГЄГ®Г¤
     glShaderSource(vShader, 1, &VertexShaderSource, NULL);
-    // Компилируем шейдер
+    // ГЉГ®Г¬ГЇГЁГ«ГЁГ°ГіГҐГ¬ ГёГҐГ©Г¤ГҐГ°
     glCompileShader(vShader);
     std::cout << "vertex shader \n";
     ShaderLog(vShader);
 
-    // Создаем фрагментный шейдер
+    // Г‘Г®Г§Г¤Г ГҐГ¬ ГґГ°Г ГЈГ¬ГҐГ­ГІГ­Г»Г© ГёГҐГ©Г¤ГҐГ°
     GLuint fShader = glCreateShader(GL_FRAGMENT_SHADER);
-    // Передаем исходный код
+    // ГЏГҐГ°ГҐГ¤Г ГҐГ¬ ГЁГ±ГµГ®Г¤Г­Г»Г© ГЄГ®Г¤
     glShaderSource(fShader, 1, &FragShaderSource, NULL);
-    // Компилируем шейдер
+    // ГЉГ®Г¬ГЇГЁГ«ГЁГ°ГіГҐГ¬ ГёГҐГ©Г¤ГҐГ°
     glCompileShader(fShader);
     std::cout << "fragment shader \n";
     ShaderLog(fShader);
 
-    // Создаем программу и прикрепляем шейдеры к ней
+    // Г‘Г®Г§Г¤Г ГҐГ¬ ГЇГ°Г®ГЈГ°Г Г¬Г¬Гі ГЁ ГЇГ°ГЁГЄГ°ГҐГЇГ«ГїГҐГ¬ ГёГҐГ©Г¤ГҐГ°Г» ГЄ Г­ГҐГ©
     Program = glCreateProgram();
     glAttachShader(Program, vShader);
     glAttachShader(Program, fShader);
 
-    // Линкуем шейдерную программу
+    // Г‹ГЁГ­ГЄГіГҐГ¬ ГёГҐГ©Г¤ГҐГ°Г­ГіГѕ ГЇГ°Г®ГЈГ°Г Г¬Г¬Гі
     glLinkProgram(Program);
-    // Проверяем статус сборки
+    // ГЏГ°Г®ГўГҐГ°ГїГҐГ¬ Г±ГІГ ГІГіГ± Г±ГЎГ®Г°ГЄГЁ
     int link_ok;
     glGetProgramiv(Program, GL_LINK_STATUS, &link_ok);
     if (!link_ok)
@@ -253,7 +252,7 @@ void InitShader() {
         return;
     }
 
-    // Вытягиваем ID атрибута вершин из собранной программы
+    // Г‚Г»ГІГїГЈГЁГўГ ГҐГ¬ ID Г ГІГ°ГЁГЎГіГІГ  ГўГҐГ°ГёГЁГ­ ГЁГ§ Г±Г®ГЎГ°Г Г­Г­Г®Г© ГЇГ°Г®ГЈГ°Г Г¬Г¬Г»
     Attrib_vertex = glGetAttribLocation(Program, "coord");
     if (Attrib_vertex == -1)
     {
@@ -261,7 +260,7 @@ void InitShader() {
         return;
     }
 
-    // Вытягиваем ID атрибута цвета
+    // Г‚Г»ГІГїГЈГЁГўГ ГҐГ¬ ID Г ГІГ°ГЁГЎГіГІГ  Г¶ГўГҐГІГ 
     Attrib_color = glGetAttribLocation(Program, "colors");
     if (Attrib_color == -1)
     {
@@ -286,28 +285,28 @@ void Init() {
 
 
 void Draw() {
-    // Устанавливаем шейдерную программу текущей
+    // Г“Г±ГІГ Г­Г ГўГ«ГЁГўГ ГҐГ¬ ГёГҐГ©Г¤ГҐГ°Г­ГіГѕ ГЇГ°Г®ГЈГ°Г Г¬Г¬Гі ГІГҐГЄГіГ№ГҐГ©
     glUseProgram(Program);
-    // Включаем массивы атрибутов
+    // Г‚ГЄГ«ГѕГ·Г ГҐГ¬ Г¬Г Г±Г±ГЁГўГ» Г ГІГ°ГЁГЎГіГІГ®Гў
     glEnableVertexAttribArray(Attrib_vertex);
     glEnableVertexAttribArray(Attrib_color);
 
-    // Подключаем VBO_position
+    // ГЏГ®Г¤ГЄГ«ГѕГ·Г ГҐГ¬ VBO_position
     glBindBuffer(GL_ARRAY_BUFFER, VBO_position);
     glVertexAttribPointer(Attrib_vertex, 2, GL_FLOAT, GL_FALSE, 0, 0);
 
-    // Подключаем VBO_color
+    // ГЏГ®Г¤ГЄГ«ГѕГ·Г ГҐГ¬ VBO_color
     glBindBuffer(GL_ARRAY_BUFFER, VBO_color);
     glVertexAttribPointer(Attrib_color, 4, GL_FLOAT, GL_FALSE, 0, 0);
 
-    // Отключаем VBO
+    // ГЋГІГЄГ«ГѕГ·Г ГҐГ¬ VBO
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glUniform2fv(Unif_scale, 1, scale);
 
-    // Передаем данные на видеокарту(рисуем)
+    // ГЏГҐГ°ГҐГ¤Г ГҐГ¬ Г¤Г Г­Г­Г»ГҐ Г­Г  ГўГЁГ¤ГҐГ®ГЄГ Г°ГІГі(Г°ГЁГ±ГіГҐГ¬)
     glDrawArrays(GL_TRIANGLE_FAN, 0, 361);
 
-    // Отключаем массивы атрибутов
+    // ГЋГІГЄГ«ГѕГ·Г ГҐГ¬ Г¬Г Г±Г±ГЁГўГ» Г ГІГ°ГЁГЎГіГІГ®Гў
     glDisableVertexAttribArray(Attrib_vertex);
     glDisableVertexAttribArray(Attrib_color);
 
@@ -316,15 +315,15 @@ void Draw() {
 }
 
 
-// Освобождение шейдеров
+// ГЋГ±ГўГ®ГЎГ®Г¦Г¤ГҐГ­ГЁГҐ ГёГҐГ©Г¤ГҐГ°Г®Гў
 void ReleaseShader() {
-    // Передавая ноль, мы отключаем шейдрную программу
+    // ГЏГҐГ°ГҐГ¤Г ГўГ Гї Г­Г®Г«Гј, Г¬Г» Г®ГІГЄГ«ГѕГ·Г ГҐГ¬ ГёГҐГ©Г¤Г°Г­ГіГѕ ГЇГ°Г®ГЈГ°Г Г¬Г¬Гі
     glUseProgram(0);
-    // Удаляем шейдерную программу
+    // Г“Г¤Г Г«ГїГҐГ¬ ГёГҐГ©Г¤ГҐГ°Г­ГіГѕ ГЇГ°Г®ГЈГ°Г Г¬Г¬Гі
     glDeleteProgram(Program);
 }
 
-// Освобождение буфера
+// ГЋГ±ГўГ®ГЎГ®Г¦Г¤ГҐГ­ГЁГҐ ГЎГіГґГҐГ°Г 
 void ReleaseVBO()
 {
     glBindBuffer(GL_ARRAY_BUFFER, 0);
